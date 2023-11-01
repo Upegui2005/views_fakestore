@@ -18,30 +18,46 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mx-auto align-items-lg-center">
+                <ul class="navbar-nav justify-content-start">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/views/catalogo.html">Productos</a>
                     </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Colecciones
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Coleccion 1</a></li>
+                            <li><a class="dropdown-item" href="#">Coleccion 2</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/views/listar_productos.html" class="nav-link active" aria-current="page">Administrador</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav mx-auto align-items-lg-center">
+                    <a class="navbar-brand ms-3" href="/views/index.html"><img src="/assets/img/logo_principal.png"
+                            alt=""></a>
+                </ul>
+                <ul class="navbar-nav justify-content-end">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#"><button
                                 class="btn btn-outline-dark text-dark-50" data-bs-toggle="modal"
                                 data-bs-target="#login">Iniciar Sesion</button></a>
                     </li>
-                    <a class="navbar-brand ms-3" href="#"><img src="/assets/img/logo_principal.png" alt=""></a>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#"><button
                                 class="btn btn-outline-dark text-dark-50" data-bs-toggle="modal"
                                 data-bs-target="#register">Registrarse</button></a>
                     </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link active" aria-current="page">Contactanos</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav justify-content-end">
-                    <li class="nav-item">
-                        <button class="btn btn-outline-dark" data-bs-toggle="offcanvas" data-bs-target="#carrito" aria-controls="carrito">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-                                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                    <li class="nav-item mt-2">
+                        <button class="btn btn-outline-dark" data-bs-toggle="offcanvas" data-bs-target="#carrito"
+                            aria-controls="carrito">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-cart" viewBox="0 0 16 16">
+                                <path
+                                    d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
                             </svg>
                         </button>
                     </li>
