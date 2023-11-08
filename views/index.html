@@ -32,8 +32,15 @@
                             <li><a class="dropdown-item" href="#">Coleccion 2</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item">
-                        <a href="/views/listar_productos.html" class="nav-link active" aria-current="page">Administrador</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Administraddor
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/views/listar_productos.html">Productos</a></li>
+                            <li><a class="dropdown-item" href="#">Usuarios</a></li>
+                        </ul>
                     </li>
                 </ul>
                 <ul class="navbar-nav mx-auto align-items-lg-center">
@@ -41,7 +48,7 @@
                             alt=""></a>
                 </ul>
                 <ul class="navbar-nav justify-content-end">
-                    <li class="nav-item">
+                    <li class="nav-item ms-5">
                         <a class="nav-link active" aria-current="page" href="#"><button
                                 class="btn btn-outline-dark text-dark-50" data-bs-toggle="modal"
                                 data-bs-target="#login">Iniciar Sesion</button></a>
@@ -51,7 +58,7 @@
                                 class="btn btn-outline-dark text-dark-50" data-bs-toggle="modal"
                                 data-bs-target="#register">Registrarse</button></a>
                     </li>
-                    <li class="nav-item mt-2">
+                    <li class="nav-item mt-2 ms-2">
                         <button class="btn btn-outline-dark" data-bs-toggle="offcanvas" data-bs-target="#carrito"
                             aria-controls="carrito">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -79,7 +86,7 @@
                             <input type="email" class="form-control" id="emailLogin" aria-describedby="emailHelp">
                         </div>
                         <div class="mb-3">
-                            <label for="passwordLogin" class="form-label">Conraseña:</label>
+                            <label for="passwordLogin" class="form-label">Contraseña:</label>
                             <input type="password" class="form-control" id="passwordLogin">
                         </div>
                         <div class="mb-3 form-check">
@@ -112,11 +119,11 @@
                             <input type="text" class="form-control" id="name" aria-describedby="nameHelp">
                         </div>
                         <div class="mb-3">
-                            <label for="password" class="form-label">Conraseña:</label>
+                            <label for="password" class="form-label">Contraseña:</label>
                             <input type="password" class="form-control" id="password">
                         </div>
                         <div class="mb-3">
-                            <label for="confirmPassword" class="form-label">Conraseña:</label>
+                            <label for="confirmPassword" class="form-label">Contraseña:</label>
                             <input type="password" class="form-control" id="confirmPassword">
                         </div>
                     </form>

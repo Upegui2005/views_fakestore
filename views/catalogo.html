@@ -8,32 +8,55 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        fetch('https://fakestoreemma.onrender.com/products')
-            .then(res => res.json())
-            .then(json => catalogo(json))
+        function Mostrar() {
+            fetch('https://fakestoreemma.onrender.com/products')
+                .then(res => res.json())
+                .then(json => catalogo(json))
 
+            function catalogo(productos) {
+                const catalogo = document.querySelector('#productos')
 
-        function catalogo(productos) {
-            const catalogo = document.querySelector('#productos')
-
-            productos.forEach(producto => {
-                catalogo.innerHTML += `
-            <div class="card mb-5 me-5" style="width: 20%;display:inline-block;">
-                <img src="${producto.image}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">${producto.title}</h5>
-                    <p class="card-text">${producto.description}</p>
-                    <h6 class="card-text">${producto.price}</h6>
-                    <a href="#" class="btn btn-outline-success">Añadir al carrito</a>
-                </div>
-            </div>`;
-            });
+                productos.forEach(producto => {
+                    catalogo.innerHTML += `
+                <div class="card mb-5 me-5" style="width: 20%;display:inline-block;">
+                    <img src="${producto.image}" class="card-img-top img-fluid" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">${producto.title}</h5>
+                        <h6 class="card-text">${producto.price}</h6>
+                        <a href="#" type="button" onclick="Detalles(${producto.id})" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Detalles</a>
+                    </div>
+                </div>`;
+                });
+            }
         }
 
+        function Detalles(id) {
+            fetch(`https://fakestoreemma.onrender.com/products/${id}`)
+                .then(res => res.json())
+                .then(json => InformacionDetalle(json))
+
+            function InformacionDetalle(detalle) {
+                const img = document.querySelector('#imgCarrito')
+                const info = document.querySelector('#info')
+                    img.innerHTML = `
+                    <img src="${detalle.image}" alt="">
+                `
+                    info.innerHTML = `
+                    <h5 class="card-title">${detalle.title}</h5>
+                    <h6 class="card-text">${detalle.price}</h6>
+                `
+            }
+        }
     </script>
+    <style>
+        .card-img-top {
+            max-height: 200px;
+            object-fit: cover;
+        }
+    </style>
 </head>
 
-<body>
+<body onload="Mostrar()">
     <nav class="navbar navbar-expand-lg" style="background-color: #e8cac3;">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -56,8 +79,15 @@
                             <li><a class="dropdown-item" href="#">Coleccion 2</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link active" aria-current="page">Contactanos</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Administraddor
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/views/listar_productos.html">Productos</a></li>
+                            <li><a class="dropdown-item" href="#">Usuarios</a></li>
+                        </ul>
                     </li>
                 </ul>
                 <ul class="navbar-nav mx-auto align-items-lg-center">
@@ -65,7 +95,7 @@
                             alt=""></a>
                 </ul>
                 <ul class="navbar-nav justify-content-end">
-                    <li class="nav-item">
+                    <li class="nav-item ms-5">
                         <a class="nav-link active" aria-current="page" href="#"><button
                                 class="btn btn-outline-dark text-dark-50" data-bs-toggle="modal"
                                 data-bs-target="#login">Iniciar Sesion</button></a>
@@ -103,7 +133,7 @@
                             <input type="email" class="form-control" id="emailLogin" aria-describedby="emailHelp">
                         </div>
                         <div class="mb-3">
-                            <label for="passwordLogin" class="form-label">Conraseña:</label>
+                            <label for="passwordLogin" class="form-label">Contraseña:</label>
                             <input type="password" class="form-control" id="passwordLogin">
                         </div>
                         <div class="mb-3 form-check">
@@ -136,11 +166,11 @@
                             <input type="text" class="form-control" id="name" aria-describedby="nameHelp">
                         </div>
                         <div class="mb-3">
-                            <label for="password" class="form-label">Conraseña:</label>
+                            <label for="password" class="form-label">Contraseña:</label>
                             <input type="password" class="form-control" id="password">
                         </div>
                         <div class="mb-3">
-                            <label for="confirmPassword" class="form-label">Conraseña:</label>
+                            <label for="confirmPassword" class="form-label">Contraseña:</label>
                             <input type="password" class="form-control" id="confirmPassword">
                         </div>
                     </form>
@@ -157,9 +187,29 @@
             <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Carrito de Compras</h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-        <hr>
         <div class="offcanvas-body">
             <p>Try scrolling the rest of the page to see this option in action.</p>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Detalle</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="imgCarrito">
+
+                    </div>
+                    <div id="info">
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-success">Añadir al Carrito</button>
+                </div>
+            </div>
         </div>
     </div>
     <main class="m-5">
