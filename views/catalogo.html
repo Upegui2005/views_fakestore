@@ -22,7 +22,7 @@
                     <img src="${producto.image}" class="card-img-top img-fluid" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">${producto.title}</h5>
-                        <h6 class="card-text">${producto.price}</h6>
+                        <h6 class="card-text">$${producto.price}</h6>
                         <a href="#" type="button" onclick="Detalles(${producto.id})" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Detalles</a>
                     </div>
                 </div>`;
@@ -38,20 +38,105 @@
             function InformacionDetalle(detalle) {
                 const img = document.querySelector('#imgCarrito')
                 const info = document.querySelector('#info')
-                    img.innerHTML = `
-                    <img src="${detalle.image}" alt="">
+                const button = document.querySelector('#buttonA')
+
+                img.innerHTML = `
+                    <img src="${detalle.image}" alt="" id="imgD">
                 `
-                    info.innerHTML = `
-                    <h5 class="card-title">${detalle.title}</h5>
-                    <h6 class="card-text">${detalle.price}</h6>
+                info.innerHTML = `
+                    <h5 class="card-title mb-2">${detalle.title}</h5>
+                    <div class="btn-group btn-group-toggle mt-3 mb-2" data-toggle="buttons">
+                        <label class="btn btn-outline-secondary">
+                            <input type="radio" name="talla" autocomplete="off" value="S">
+                            S
+                        </label>
+                        <label class="btn btn-outline-secondary">
+                            <input type="radio" name="talla" autocomplete="off" value="M">
+                            M
+                        </label>
+                        <label class="btn btn-outline-secondary">
+                            <input type="radio" name="talla" autocomplete="off" value="L">
+                            L
+                        </label>
+                        <label class="btn btn-outline-secondary">
+                            <input type="radio" name="talla" autocomplete="off" value="XL">
+                            XL
+                        </label>
+                    </div>
+                    <h6 class="card-text mt-2">$${detalle.price}</h6>
+                `
+
+                button.innerHTML = `
+                    <button type="button" class="btn btn-outline-success" onclick="Agregar(${detalle.id})">Añadir al Carrito</button>
+                `
+            }
+        }
+
+        function Agregar(id) {
+            fetch(`https://fakestoreemma.onrender.com/products/${id}`)
+                .then(res => res.json())
+                .then(json => InfoCarrito(json))
+
+            function InfoCarrito(articulos) {
+                const mostrar = document.querySelector('#mostrar')
+
+                mostrar.innerHTML = `
+                    <div class="card border-0 ms-4" style="width: 20rem;">
+                        <img src="${articulos.image}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">${articulos.title}</h5>
+                            <p class="card-text">$${articulos.price}</p>
+                        </div>
+                    </div>
                 `
             }
         }
     </script>
     <style>
+        .card {
+            height: 430px;
+            width: 200px;
+            margin: 10px;
+            overflow: hidden;
+            display: flex;
+            text-align: center;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
         .card-img-top {
-            max-height: 200px;
+            width: auto;
+            height: 250px;
             object-fit: cover;
+            padding-block: .5rem;
+            margin: auto;
+            object-fit: cover;
+        }
+
+        .button-container {
+            display: inline-block;
+            position: relative;
+        }
+
+        .button-container a {
+            position: absolute;
+            bottom: 4em;
+            left: 5em;
+            border-radius: 1.5em;
+            padding: 1em 1.5em;
+        }
+
+        .modal-dialog {
+            max-width: 30%;
+        }
+
+        #imgD {
+            width: 50%;
+        }
+
+        #imgCarrito {
+            width: 50%;
         }
     </style>
 </head>
@@ -187,27 +272,30 @@
             <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Carrito de Compras</h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-        <div class="offcanvas-body">
-            <p>Try scrolling the rest of the page to see this option in action.</p>
+        <div class="offcanvas-body" id="carrito">
+            <div id="mostrar">
+
+            </div>
         </div>
     </div>
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade col-lg-6" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Detalle</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <div id="imgCarrito">
+                <div class="modal-body d-inline-flex">
+                    <div id="imgCarrito" class="ms-5">
 
                     </div>
-                    <div id="info">
+                    <div id="info" class="me-3">
 
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-success">Añadir al Carrito</button>
+                <div class="modal-footer" id="buttonA">
+
                 </div>
             </div>
         </div>
