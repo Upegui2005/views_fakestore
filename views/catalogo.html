@@ -78,15 +78,23 @@
                 .then(json => InfoCarrito(json))
 
             function InfoCarrito(articulos) {
-                const mostrar = document.querySelector('#mostrar')
+                const mostrar = document.querySelector('#mostrar');
+                const fotter = document.querySelector('#pagar')
 
-                mostrar.innerHTML = `
+                mostrar.innerHTML += `
                     <div class="card border-0 ms-4" style="width: 20rem;">
                         <img src="${articulos.image}" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">${articulos.title}</h5>
                             <p class="card-text">$${articulos.price}</p>
                         </div>
+                    </div>
+                `
+
+                fotter.innerHTML = `
+                    <div class="d-inline-flex">
+                        <h3 class="mt-1">Total:<h3>
+                        <button class="btn btn-outline-success">Pagar</button>
                     </div>
                 `
             }
@@ -176,8 +184,7 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav mx-auto align-items-lg-center">
-                    <a class="navbar-brand ms-3" href="/views/index.html"><img src="/assets/img/logo_principal.png"
-                            alt=""></a>
+                    <a class="navbar-brand ms-3" href="/views/index.html"><img src="/assets/img/logo_principal.png" alt=""></a>
                 </ul>
                 <ul class="navbar-nav justify-content-end">
                     <li class="nav-item ms-5">
@@ -275,6 +282,10 @@
         <div class="offcanvas-body" id="carrito">
             <div id="mostrar">
 
+            </div>
+            <hr>
+            <div id="pagar">
+                
             </div>
         </div>
     </div>
